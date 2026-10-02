@@ -15,9 +15,6 @@ class AskAI extends \Piwik\Plugin
     public function registerEvents()
     {
         return array(
-            'Template.afterEventsReport' => 'renderOpenmostCommunicationAfterEvents',
-            'Widget.filterWidgets' => 'addOpenmostCommunicationWidgets',
-            'Template.beforeContent' => 'renderOpenmostCommunication',
             'AssetManager.getJavaScriptFiles' => 'getJavaScriptFiles',
             'AssetManager.getStylesheetFiles' => 'getStylesheetFiles',
             'Translate.getClientSideTranslationKeys' => 'getClientSideTranslationKeys',
@@ -80,20 +77,5 @@ class AskAI extends \Piwik\Plugin
     {
         // also styles the setup steps shown on the chat page while AI Providers cannot answer
         $files[] = "plugins/AskAI/assets/css/app.css";
-    }
-
-    public function renderOpenmostCommunication(&$out, $layout, $module = '', $action = '')
-    {
-        OpenmostCommunication::beforeContent($out, (string) $layout, (string) $module, (string) $action, $this->getPluginName());
-    }
-
-    public function addOpenmostCommunicationWidgets($list)
-    {
-        OpenmostCommunication::filterWidgets($list, $this->getPluginName());
-    }
-
-    public function renderOpenmostCommunicationAfterEvents(&$out, $dataTable = null)
-    {
-        OpenmostCommunication::afterEventsReport($out, $this->getPluginName());
     }
 }

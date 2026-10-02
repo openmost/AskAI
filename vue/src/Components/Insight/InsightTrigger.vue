@@ -94,7 +94,6 @@ export default defineComponent({
   background-color: var(--theme-color-background-contrast);
   border: 1px solid var(--theme-color-border);
   border-radius: 8px;
-  color: v-bind(aiColor);
   cursor: pointer;
   transition: border-color .15s ease;
 
@@ -112,7 +111,7 @@ export default defineComponent({
     outline: 2px solid var(--theme-color-focus-ring);
   }
 
-  // :deep() as IconAi has several root nodes, its svg never gets this scope attribute
+  // :deep() as the svg belongs to the IconAi child component, it never gets this scope attribute
   :deep(svg) {
     display: block;
     width: 16px;
