@@ -57,6 +57,8 @@ class ConversationRunner
             if ($messages === [] || $messages[0]['role'] !== 'user') {
                 array_unshift($messages, ['role' => 'user', 'content' => Piwik::translate('AskAI_InsightAgentPrompt')]);
             }
+            // opened again on the same report, the panel posts its previous answer last
+            $messages = $this->parser->endWithQuestion($messages, Piwik::translate('AskAI_InsightAgentPrompt'));
             $featureKey = self::FEATURE_INSIGHTS;
         } else {
             $basePrompt = Piwik::translate('AskAI_ChatSystemPrompt');

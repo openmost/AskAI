@@ -28,7 +28,8 @@
 
 .ai-chat-theme-dark() {
   --ai-chat-accent-strong: color-mix(in srgb, var(--ai-chat-accent) 80%, #fff);
-  --ai-chat-on-accent: #04130e;
+  // white keeps 4.8:1 on the blue accent, a dark tint only reaches 4:1
+  --ai-chat-on-accent: #fff;
   --ai-chat-accent-soft: color-mix(in srgb, var(--ai-chat-accent) 18%, var(--ai-chat-surface));
   --ai-chat-hairline: color-mix(in srgb, var(--ai-chat-text) 16%, transparent);
   --ai-chat-zebra: color-mix(in srgb, var(--ai-chat-text) 6%, transparent);
