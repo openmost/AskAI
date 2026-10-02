@@ -1,0 +1,215 @@
+<template>
+  <div class="ai-chat-page ai-chat-theme">
+    <header class="ai-chat-page__bar">
+      <span
+        class="ai-chat-page__mark"
+        aria-hidden="true"
+      >
+        <IconAi :ai-name="aiName" />
+      </span>
+      <h2 class="ai-chat-page__title">{{ titleText }}</h2>
+      <button
+        type="button"
+        class="ai-chat-page__new"
+        :aria-label="newConversationText"
+        :title="newConversationText"
+        @click="newConversation"
+      >
+        <ChatIcon name="plus" :size="16" />
+        <span>{{ newConversationText }}</span>
+      </button>
+    </header>
+
+    <Chat
+      :key="conversationKey"
+      ref="chat"
+      class="ai-chat-page__chat"
+      variant="page"
+      show-empty-state
+      :ai-name="aiName"
+      :ai-label="aiLabel"
+      :ai-color="aiColor"
+    />
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { translate } from 'CoreHome';
+import Chat from '../Components/Chat/Chat.vue';
+import IconAi from '../Components/Icon/IconAi.vue';
+import ChatIcon from '../Components/Icon/ChatIcon.vue';
+
+export default defineComponent({
+  components: {
+    Chat,
+    ChatIcon,
+    IconAi,
+  },
+  props: {
+    aiName: { type: String, required: true },
+    aiLabel: { type: String, required: true },
+    aiColor: { type: String, default: '#426CDA' },
+  },
+  data() {
+    return {
+      conversationKey: 0,
+    };
+  },
+  computed: {
+    titleText(): string {
+      return translate('AskAI_AskAI');
+    },
+    newConversationText(): string {
+      return translate('AskAI_NewConversation');
+    },
+  },
+  mounted() {
+    this.focusInput();
+  },
+  methods: {
+    newConversation() {
+      // a new Chat instance: new conversation id, and the pending request is aborted
+      this.conversationKey += 1;
+      this.$nextTick(() => this.focusInput());
+    },
+    focusInput() {
+      (this.$refs.chat as InstanceType<typeof Chat> | undefined)?.focusInput();
+    },
+  },
+});
+</script>
+
+<style lang="less">
+// the chat page fills the viewport under the Matomo header, without the page footer spacing
+body:has(.ai-chat-page) {
+  #root {
+    margin-bottom: 0 !important;
+  }
+
+  #pageFooter {
+    display: none;
+  }
+
+  // no period or segment selector on this page, its empty row would only push the chat down
+  #root .top_controls:not(:has(*)) {
+    display: none !important;
+  }
+}
+</style>
+
+<style lang="less" scoped>
+.ai-chat-page {
+  --ai-chat-accent: v-bind(aiColor);
+  --ai-chat-column-width: 48rem;
+  --ai-chat-column-padding: 1.5rem 1.25rem 2rem;
+  --ai-chat-composer-padding: .5rem 1.25rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  // the Matomo header is 64px high, plus the top and bottom gutters
+  height: calc(100vh - 96px);
+  height: calc(100dvh - 96px);
+  min-height: 420px;
+  margin: 16px;
+  overflow: hidden;
+  border: 1px solid var(--ai-chat-hairline);
+  border-radius: var(--ai-chat-radius);
+  background: var(--ai-chat-surface);
+  font-size: 14px;
+  text-align: left;
+}
+
+.ai-chat-page__bar {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1rem .75rem 1.25rem;
+  border-bottom: 1px solid var(--ai-chat-hairline);
+}
+
+.ai-chat-page__mark {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--ai-chat-accent-soft);
+  color: var(--ai-chat-accent-strong);
+
+  :deep(svg) {
+    display: block;
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.ai-chat-page__title {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: var(--ai-chat-text-strong);
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.ai-chat-page__new {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: .375rem;
+  height: 34px;
+  margin: 0;
+  padding: 0 .75rem;
+  border: 1px solid var(--ai-chat-border);
+  border-radius: var(--ai-chat-radius-small);
+  background: var(--ai-chat-surface);
+  color: var(--ai-chat-text);
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: none;
+  box-shadow: none;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--ai-chat-surface-raised);
+  }
+}
+
+.ai-chat-page__chat {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .ai-chat-page {
+    --ai-chat-column-padding: 1rem .875rem 1.5rem;
+    --ai-chat-composer-padding: .5rem .75rem .75rem;
+
+    height: calc(100vh - 150px);
+    height: calc(100dvh - 150px);
+    margin: 0;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .ai-chat-page__new span {
+    display: none;
+  }
+
+  .ai-chat-page__new {
+    width: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+}
+</style>

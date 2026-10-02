@@ -1,0 +1,31 @@
+/* the trigger sits in the report header controls row, it only floats in the fallback spot inside the title */
+.enrichedHeadline .ai-chat-insight-trigger-vue-wrapper {
+    float: right;
+    margin-left: 5px;
+}
+
+/* the insights panel scrolls on its own, lock the page scroll while it is open */
+html.ai-chat-page-scroll-locked,
+html.ai-chat-page-scroll-locked body {
+    overflow: hidden !important;
+}
+
+/* the chat page while AI Providers cannot answer: the steps to take, in order */
+.card.askai-unavailable {
+    margin-top: 16px;
+}
+
+.askai-unavailable .card-content ul.askai-unavailable__steps {
+    margin: 1em 0 0;
+    padding-left: 1.5em;
+}
+
+.askai-unavailable .card-content ul.askai-unavailable__steps li {
+    margin-bottom: .5em;
+    list-style: decimal;
+}
+
+/* no period or segment selector on this page, its empty row would only push the steps down */
+body:has(.askai-unavailable) #root .top_controls:not(:has(*)) {
+    display: none !important;
+}
