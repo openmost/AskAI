@@ -87,6 +87,18 @@ class PromptTranslationsTest extends TestCase
         $this->assertStringStartsWith('You are the AI assistant built into Matomo', $this->getEnglish()['ChatSystemPrompt']);
     }
 
+    public function test_thePrompts_haveTheRulesOnPartialPeriodsAndComputedFigures(): void
+    {
+        $english = $this->getEnglish();
+
+        foreach (self::PROMPT_KEYS as $key) {
+            $this->assertStringContainsString('includes today or has not ended yet, say that its figures are partial', $english[$key], $key);
+            $this->assertStringContainsString('never present a drop against a full previous period as a decline', $english[$key], $key);
+            $this->assertStringContainsString('Compute every difference, percentage and ratio from the exact numbers', $english[$key], $key);
+            $this->assertStringContainsString('When unsure, show the raw numbers instead of a computed claim.', $english[$key], $key);
+        }
+    }
+
     public function getLanguageFiles(): array
     {
         $files = [];
