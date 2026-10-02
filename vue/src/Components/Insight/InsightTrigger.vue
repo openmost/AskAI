@@ -91,10 +91,8 @@ export default defineComponent({
 }
 
 .ai-chat-insight-trigger-button {
-  color: v-bind(aiColor);
-
   // Square box the size of the Matomo icon font in the other buttons, a wide logo fits inside it.
-  // :deep() as IconAi has several root nodes, its svg never gets this scope attribute
+  // :deep() as the svg belongs to the IconAi child component, it never gets this scope attribute
   :deep(svg) {
     display: block;
     width: 16px;
