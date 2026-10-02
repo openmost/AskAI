@@ -1,0 +1,36 @@
+{% extends 'dashboard.twig' %}
+
+{% block content %}
+
+    {% if is_available %}
+
+        <div vue-entry="AskAI.ChatIndexPage"
+             ai-name="ask-ai"
+             ai-label="{{ 'AskAI_AiAssistant'|translate|e('html_attr') }}"
+             ai-color="#426CDA"
+        ></div>
+
+    {% else %}
+
+        <div class="card askai-unavailable">
+            <div class="card-content">
+                <h2 class="card-title">{{ 'AskAI_NotAvailableTitle'|translate }}</h2>
+                <p>{{ 'AskAI_NotAvailableText'|translate }}</p>
+                <ul class="askai-unavailable__steps">
+                    {% for recommendation in recommendations %}
+                        <li>
+                            {{ recommendation.message|translate }}
+                            {% if recommendation.url %}
+                                <a href="{{ recommendation.url }}">{{ recommendation.action|translate }}</a>
+                            {% elseif recommendation.askAdministrator %}
+                                {{ 'AskAI_AskAdministrator'|translate }}
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
