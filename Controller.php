@@ -16,6 +16,7 @@ use Piwik\Plugins\AIProviders\Exception\AIProviderException;
 use Piwik\Plugins\AskAI\Agent\McpAgent;
 use Piwik\Plugins\AskAI\Services\ConversationRunner;
 use Piwik\Plugins\AskAI\Services\InsightNotAvailableException;
+use Piwik\Plugins\AskAI\Services\RateLimitExceededException;
 use Piwik\Plugins\AskAI\Services\SafeErrorMessage;
 use Piwik\Request;
 use Piwik\Session;
@@ -120,13 +121,13 @@ class Controller extends \Piwik\Plugin\Controller
         flush();
 
         $emit = static function (string $type, array $data = []): void {
-            echo 'data: ' . json_encode(['type' => $type] + $data) . "\n\n";
+            echo 'data: ' . json_encode(['type' => $type] + $data, JSON_INVALID_UTF8_SUBSTITUTE) . "\n\n";
             flush();
         };
 
         try {
             $producer($emit);
-        } catch (AIProviderException | InsightNotAvailableException $e) {
+        } catch (AIProviderException | InsightNotAvailableException | RateLimitExceededException $e) {
             $emit('error', ['message' => SafeErrorMessage::fromThrowable($e)]);
         } catch (\Throwable $e) {
             StaticContainer::get(LoggerInterface::class)->error('AskAI agent error: {message}', [

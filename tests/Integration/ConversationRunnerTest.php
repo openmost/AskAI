@@ -266,6 +266,21 @@ class ConversationRunnerTest extends IntegrationTestCase
         ];
     }
 
+    public function test_run_insight_asksForTheAnalysisAgain_whenThePanelIsOpenedAgainAfterAnAnswer(): void
+    {
+        $this->agent->responses = [$this->textResponse('New analysis')];
+
+        $this->run_([['role' => 'assistant', 'content' => 'Previous analysis']], ['module' => 'VisitsSummary', 'action' => 'get']);
+
+        $prompt = Piwik::translate('AskAI_InsightAgentPrompt');
+        $this->assertSame([
+            ['role' => 'user', 'content' => [['type' => 'text', 'text' => $prompt]]],
+            ['role' => 'assistant', 'content' => [['type' => 'text', 'text' => 'Previous analysis']]],
+            ['role' => 'user', 'content' => [['type' => 'text', 'text' => $prompt]]],
+        ], $this->agent->requests[0]->getMessages());
+    }
+
+
     /**
      * @param list<array<string, string>> $messages
      * @param array<string, string> $widgetParams
