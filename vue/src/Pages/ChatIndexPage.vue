@@ -139,7 +139,7 @@ body:has(.ai-chat-page) {
   height: 30px;
   border-radius: 8px;
   background: var(--ai-chat-accent-soft);
-  color: var(--ai-chat-accent-strong);
+  color: var(--ai-chat-accent);
 
   :deep(svg) {
     display: block;
