@@ -78,7 +78,9 @@ const FOCUSABLE = [
   '[tabindex]:not([tabindex="-1"])',
 ].join(',');
 
-const PAGE_SCROLL_LOCK_CLASS = 'ai-chat-page-scroll-locked';
+// one class per plugin: closing this panel because another AI plugin opens its own must not
+// unlock the scroll that plugin has just locked
+const PAGE_SCROLL_LOCK_CLASS = 'ai-chat-page-scroll-locked-askai';
 
 export default defineComponent({
   components: {
@@ -241,7 +243,7 @@ export default defineComponent({
   height: 32px;
   border-radius: 9px;
   background: var(--ai-chat-accent-soft);
-  color: var(--ai-chat-accent-strong);
+  color: var(--ai-chat-accent);
 
   :deep(svg) {
     display: block;

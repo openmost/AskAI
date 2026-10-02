@@ -84,6 +84,13 @@ function button(trigger: Wrapper) {
   return trigger.find('button');
 }
 
+const OWNER = 'AskAI';
+const OTHER_OWNERS = ['ChatGPT', 'MistralAI', 'Claude'];
+
+function scrollLockClass(owner: string): string {
+  return `ai-chat-page-scroll-locked-${owner.toLowerCase()}`;
+}
+
 function dialog(): HTMLElement {
   return document.querySelector('[role="dialog"]') as HTMLElement;
 }
@@ -107,7 +114,7 @@ describe('InsightOverlay', () => {
 
   afterEach(() => {
     wrappers.splice(0).forEach((wrapper) => wrapper.unmount());
-    document.documentElement.classList.remove('ai-chat-page-scroll-locked');
+    document.documentElement.classList.remove(...[OWNER, ...OTHER_OWNERS].map(scrollLockClass));
   });
 
   it('is an accessible modal dialog labelled by its title', async () => {
@@ -174,7 +181,7 @@ describe('InsightOverlay', () => {
 
     expect(isDialogVisible()).toBe(false);
     expect(document.activeElement).toBe(button(triggerB).element);
-    expect(document.documentElement.classList.contains('ai-chat-page-scroll-locked')).toBe(false);
+    expect(document.documentElement.classList.contains(scrollLockClass(OWNER))).toBe(false);
   });
 
   it('closes with its close button and gives the focus back to the trigger', async () => {
@@ -208,17 +215,44 @@ describe('InsightOverlay', () => {
     expect(document.activeElement).toBe(last);
   });
 
-  it('closes when the insights panel of another AI plugin opens', async () => {
+  it.each(OTHER_OWNERS)('closes when the insights panel of %s opens', async (owner) => {
     await button(triggerA).trigger('click');
     await flushPromises();
+    expect(document.documentElement.classList.contains(scrollLockClass(OWNER))).toBe(true);
+    // the other plugin locks the page scroll for its own panel at the same time
+    document.documentElement.classList.add(scrollLockClass(owner));
 
-    window.dispatchEvent(new CustomEvent(OVERLAY_OPEN_EVENT, {
-      detail: { owner: 'MistralAI' },
-    }));
+    window.dispatchEvent(new CustomEvent(OVERLAY_OPEN_EVENT, { detail: { owner } }));
     await flushPromises();
 
     expect(isDialogVisible()).toBe(false);
     expect(button(triggerA).attributes('aria-expanded')).toBe('false');
+    expect(document.documentElement.classList.contains(scrollLockClass(OWNER))).toBe(false);
+    expect(document.documentElement.classList.contains(scrollLockClass(owner))).toBe(true);
+  });
+
+  it('stays open when the opening event comes from its own panel', async () => {
+    await button(triggerA).trigger('click');
+    await flushPromises();
+
+    window.dispatchEvent(new CustomEvent(OVERLAY_OPEN_EVENT, { detail: { owner: OWNER } }));
+    await flushPromises();
+
+    expect(isDialogVisible()).toBe(true);
+  });
+
+  it('opens again after another AI plugin closed it', async () => {
+    await button(triggerA).trigger('click');
+    await flushPromises();
+    const [otherOwner] = OTHER_OWNERS;
+    window.dispatchEvent(new CustomEvent(OVERLAY_OPEN_EVENT, { detail: { owner: otherOwner } }));
+    await flushPromises();
+
+    await button(triggerA).trigger('click');
+    await flushPromises();
+
+    expect(isDialogVisible()).toBe(true);
+    expect(button(triggerA).attributes('aria-expanded')).toBe('true');
   });
 
   it('announces its opening as AskAI, so the panels of the other AI plugins close', async () => {
