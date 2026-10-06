@@ -25,6 +25,7 @@ use Piwik\Plugins\AskAI\Services\RateLimiter;
 use Piwik\Plugins\AskAI\tests\Fakes\FakePluginDependencies;
 use Piwik\Plugins\AskAI\tests\Fakes\ScriptedMcpAgent;
 use Piwik\Tests\Framework\Fixture;
+use Piwik\Plugins\AskAI\SystemSettings;
 use Piwik\Tests\Framework\Mock\FakeAccess;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
 
@@ -65,6 +66,11 @@ class ConversationRunnerTest extends IntegrationTestCase
         Fixture::createSuperUser();
         FakeAccess::clearAccess(true);
         $this->idSite = (int) Fixture::createWebsite('2024-01-01 00:00:00', 1, 'Openmost website');
+
+        // the data sharing is off by default, these tests cover what happens once a super user allows it
+        $settings = new SystemSettings();
+        $settings->dataSharingAllowed->setValue(true);
+        $settings->save();
 
         // the test environment only loads the translations of the core plugins
         StaticContainer::get('Piwik\Translation\Translator')->addDirectory(__DIR__ . '/../../lang');

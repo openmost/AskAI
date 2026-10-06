@@ -12,6 +12,7 @@ use Piwik\Log\LoggerInterface;
 use Piwik\Plugins\AIProviders\AIConversationRequest;
 use Piwik\Plugins\AIProviders\AIConversationResponse;
 use Piwik\Plugins\AskAI\Agent\McpAgent;
+use Piwik\Plugins\AskAI\Services\DataPrivacy;
 
 /**
  * Agent with scripted MCP tool catalog and tool results. The AI provider answers are scripted on the fake
@@ -50,6 +51,14 @@ class ScriptedMcpAgent extends McpAgent
         $service = $dependencies->fakeService();
         $this->responses = &$service->responses;
         $this->requests = &$service->conversations;
+    }
+
+    /** @var array<string, bool> privacy settings, the data sharing is allowed so the agent can run */
+    public $privacyOptions = [DataPrivacy::SETTING_DATA_SHARING => true];
+
+    public function getPrivacy(): DataPrivacy
+    {
+        return new DataPrivacy($this->privacyOptions);
     }
 
     protected function fetchToolCatalog(): array

@@ -13,10 +13,12 @@ namespace Piwik\Plugins\AskAI\tests\Unit;
 use PHPUnit\Framework\TestCase;
 use Piwik\Plugins\AskAI\Controller;
 use Piwik\Plugins\AskAI\Menu;
+use Piwik\Plugins\AskAI\Services\DataPrivacy;
+use Piwik\Plugins\AskAI\SystemSettings;
 
 /**
- * AskAI has no settings of its own: the provider, the model and the credentials belong to AI Providers, the prompts
- * are fixed translations. Every engine call goes through the AIProviderService.
+ * AskAI has no settings of its own but the privacy ones: the provider, the model and the credentials belong to AI
+ * Providers, the prompts are fixed translations. Every engine call goes through the AIProviderService.
  *
  * @group AskAI
  * @group AskAINoSettingsTest
@@ -26,9 +28,9 @@ class NoSettingsTest extends TestCase
 {
     private const PLUGIN_DIR = __DIR__ . '/../..';
 
-    public function test_thePluginShipsNoSettingsClass_noApiClass_andNoSettingsTemplate(): void
+    public function test_thePluginShipsNoSettingsClass_butThePrivacyOne_noApiClass_andNoSettingsTemplate(): void
     {
-        foreach (['SystemSettings.php', 'MeasurableSettings.php', 'UserSettings.php', 'SettingsBase.php', 'API.php', 'Config.php'] as $file) {
+        foreach (['MeasurableSettings.php', 'UserSettings.php', 'SettingsBase.php', 'API.php', 'Config.php'] as $file) {
             $this->assertFalse(file_exists(self::PLUGIN_DIR . '/' . $file), $file);
         }
         $this->assertFalse(is_dir(self::PLUGIN_DIR . '/Settings'));
@@ -37,10 +39,29 @@ class NoSettingsTest extends TestCase
         $this->assertSame(['index.twig'], $templates);
 
         foreach ($this->getPhpSources() as $file) {
+            if (basename($file) === 'SystemSettings.php') {
+                continue;
+            }
             $source = (string) file_get_contents($file);
             $this->assertSame(0, preg_match('/extends\s+[\\\\\w]*Settings\b/', $source), $file);
             $this->assertStringNotContainsString('Piwik\Settings\\', $source, $file);
         }
+    }
+
+    public function test_theOnlySettingsAreThePrivacySettings(): void
+    {
+        $settings = [];
+        foreach ((new \ReflectionClass(SystemSettings::class))->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
+            if ($property->getDeclaringClass()->getName() === SystemSettings::class) {
+                $settings[] = $property->getName();
+            }
+        }
+        sort($settings);
+
+        $privacySettings = array_keys(DataPrivacy::DEFAULTS);
+        sort($privacySettings);
+
+        $this->assertSame($privacySettings, $settings);
     }
 
     public function test_theControllerOnlyRoutesTheChatPage_theAgentStatus_andTheAgent(): void
@@ -73,6 +94,9 @@ class NoSettingsTest extends TestCase
         $english = json_decode((string) file_get_contents(self::PLUGIN_DIR . '/lang/en.json'), true)['AskAI'];
 
         foreach (array_keys($english) as $key) {
+            if (strpos($key, 'PrivacySetting') === 0) {
+                continue;
+            }
             $this->assertSame(0, preg_match('/ApiKey|Host|Model|Setting|BasePrompt|Reset|UseGeneral/', $key));
         }
     }

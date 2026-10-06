@@ -1,7 +1,7 @@
 {
     "name": "AskAI",
     "description": "Ask any AI model connected in Matomo's AI Providers about your reports, with an agent on live data.",
-    "version": "6.0.0",
+    "version": "6.1.0",
     "theme": false,
     "require": {
         "matomo": ">=6.0.0-b1,<7.0.0-b1",
