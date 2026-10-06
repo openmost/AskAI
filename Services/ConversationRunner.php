@@ -50,6 +50,12 @@ class ConversationRunner
      */
     public function run(int $idSite, string $period, string $date, string $sessionKey, callable $emit, $messages = [], $widgetParams = []): void
     {
+        $dataSharingError = $this->agent->getPrivacy()->getDataSharingError();
+        if ($dataSharingError !== null) {
+            $emit('error', ['message' => $dataSharingError]);
+            return;
+        }
+
         $this->rateLimiter->check($idSite);
 
         if (!$this->agent->isAiAvailable()) {

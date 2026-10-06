@@ -48,6 +48,7 @@ class AskAI extends \Piwik\Plugin
         $translationKeys[] = 'AskAI_AgentStepError';
         $translationKeys[] = 'AskAI_EmptyStateTitle';
         $translationKeys[] = 'AskAI_EmptyStateText';
+        $translationKeys[] = 'AskAI_DataNotice';
         $translationKeys[] = 'AskAI_SuggestionsLabel';
         $translationKeys[] = 'AskAI_SuggestionWeeklyKpis';
         $translationKeys[] = 'AskAI_SuggestionTopPages';
@@ -60,7 +61,7 @@ class AskAI extends \Piwik\Plugin
         $translationKeys[] = 'AskAI_CodeCopied';
         $translationKeys[] = 'AskAI_NotAvailableTitle';
         $translationKeys[] = 'AskAI_NotAvailableText';
-        foreach (['InstallAiProviders', 'ActivateAiProviders', 'ConnectProvider', 'InstallMcpServer', 'ActivateMcpServer', 'EnableMcp', 'EnableWriteMode'] as $step) {
+        foreach (['AllowDataSharing', 'InstallAiProviders', 'ActivateAiProviders', 'ConnectProvider', 'InstallMcpServer', 'ActivateMcpServer', 'EnableMcp', 'EnableWriteMode'] as $step) {
             $translationKeys[] = 'AskAI_Recommend' . $step;
             $translationKeys[] = 'AskAI_Recommend' . $step . 'Action';
         }

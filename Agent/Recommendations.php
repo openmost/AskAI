@@ -15,6 +15,7 @@ namespace Piwik\Plugins\AskAI\Agent;
  */
 final class Recommendations
 {
+    public const ALLOW_DATA_SHARING = 'allowDataSharing';
     public const INSTALL_AI_PROVIDERS = 'installAiProviders';
     public const ACTIVATE_AI_PROVIDERS = 'activateAiProviders';
     public const CONNECT_PROVIDER = 'connectProvider';
@@ -25,6 +26,7 @@ final class Recommendations
     public const ENABLE_WRITE_MODE = 'enableWriteMode';
 
     private const MESSAGES = [
+        self::ALLOW_DATA_SHARING => ['AskAI_RecommendAllowDataSharing', 'AskAI_RecommendAllowDataSharingAction'],
         self::INSTALL_AI_PROVIDERS => ['AskAI_RecommendInstallAiProviders', 'AskAI_RecommendInstallAiProvidersAction'],
         self::ACTIVATE_AI_PROVIDERS => ['AskAI_RecommendActivateAiProviders', 'AskAI_RecommendActivateAiProvidersAction'],
         self::CONNECT_PROVIDER => ['AskAI_RecommendConnectProvider', 'AskAI_RecommendConnectProviderAction'],
@@ -36,8 +38,8 @@ final class Recommendations
     ];
 
     /**
-     * @param array{aiPlugin: string, ai: string, aiManaged: bool, mcp: string, canPerformActions: bool} $state
-     *        aiPlugin is a PluginDependencies::PLUGIN_* state, ai a PluginDependencies::AI_* status, mcp a
+     * @param array{dataSharing?: bool, aiPlugin: string, ai: string, aiManaged: bool, mcp: string, canPerformActions: bool} $state
+     *        dataSharing is false until a super user allows sending Matomo data to the provider, aiPlugin is a PluginDependencies::PLUGIN_* state, ai a PluginDependencies::AI_* status, mcp a
      *        McpAgent::STATUS_* status
      * @param array<string, string|int> $urlParams idSite, period and date of the current page
      * @return list<array{id: string, message: string, action: string, url: string, askAdministrator: bool}>
@@ -63,12 +65,16 @@ final class Recommendations
     }
 
     /**
-     * @param array{aiPlugin: string, ai: string, aiManaged: bool, mcp: string, canPerformActions: bool} $state
+     * @param array{dataSharing?: bool, aiPlugin: string, ai: string, aiManaged: bool, mcp: string, canPerformActions: bool} $state
      * @return list<string>
      */
     private static function getApplicableIds(array $state): array
     {
         $ids = [];
+        // the consent comes first: without it, nothing reaches the provider whatever the other steps
+        if (isset($state['dataSharing']) && !$state['dataSharing']) {
+            $ids[] = self::ALLOW_DATA_SHARING;
+        }
         if ($state['aiPlugin'] === PluginDependencies::PLUGIN_MISSING) {
             $ids[] = self::INSTALL_AI_PROVIDERS;
         } elseif ($state['aiPlugin'] === PluginDependencies::PLUGIN_INACTIVE) {
@@ -118,6 +124,9 @@ final class Recommendations
             case self::INSTALL_MCP_SERVER:
                 return self::buildUrl(['module' => 'Marketplace', 'action' => 'overview'], $urlParams)
                     . '#?' . http_build_query(['showPlugin' => PluginDependencies::MCP_SERVER]);
+            case self::ALLOW_DATA_SHARING:
+                return self::buildUrl(['module' => 'CoreAdminHome', 'action' => 'generalSettings'], $urlParams)
+                    . '#/AskAI';
             case self::ENABLE_MCP:
             case self::ENABLE_WRITE_MODE:
                 return self::buildUrl(['module' => 'CoreAdminHome', 'action' => 'generalSettings'], $urlParams)

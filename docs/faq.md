@@ -4,8 +4,13 @@ __How do I install and configure this plugin?__
 
 1. Install and activate **AskAI** from **Administration > Platform > Marketplace**.
 2. As a super user, connect a provider in **Administration > System > AI Providers**.
+3. Check **Allow sending Matomo data to the AI provider** in **Administration > System > General settings > AskAI**: it is off by default.
 
-There is nothing to configure in AskAI itself. You can also download the plugin from [GitHub](https://github.com/openmost/AskAI), extract it to your `plugins/` folder and activate it.
+Apart from this consent and the other privacy settings, there is nothing to configure in AskAI itself. You can also download the plugin from [GitHub](https://github.com/openmost/AskAI), extract it to your `plugins/` folder and activate it.
+
+__The chat says that data sharing is not allowed__
+
+No Matomo data leaves your instance without an explicit decision: a super user must check **Allow sending Matomo data to the AI provider** in **Administration > System > General settings > AskAI**. Other users are asked to contact a super user.
 
 __What do I need to make it work?__
 

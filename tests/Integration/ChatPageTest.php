@@ -18,6 +18,7 @@ use Piwik\Plugins\AskAI\Agent\McpAgent;
 use Piwik\Plugins\AskAI\Agent\PluginDependencies;
 use Piwik\Plugins\AskAI\tests\Fakes\FakePluginDependencies;
 use Piwik\Tests\Framework\Fixture;
+use Piwik\Plugins\AskAI\SystemSettings;
 use Piwik\Tests\Framework\Mock\FakeAccess;
 use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
 
@@ -42,11 +43,19 @@ class ChatPageTest extends IntegrationTestCase
         Fixture::createSuperUser();
         FakeAccess::clearAccess(true);
         $this->idSite = (int) Fixture::createWebsite('2024-01-01 00:00:00');
+        self::setDataSharing(true);
 
         // the test environment only loads the translations of the core plugins
         StaticContainer::get('Piwik\Translation\Translator')->addDirectory(__DIR__ . '/../../lang');
 
         $this->originalGet = $_GET;
+    }
+
+    private static function setDataSharing(bool $allowed): void
+    {
+        $settings = new SystemSettings();
+        $settings->dataSharingAllowed->setValue($allowed);
+        $settings->save();
     }
 
     public function tearDown(): void
@@ -108,6 +117,14 @@ class ChatPageTest extends IntegrationTestCase
     public function getUnavailableStates(): array
     {
         return [
+            'data sharing not allowed' => [
+                function () {
+                    // off by default: the chat stays unavailable until a super user allows it
+                    self::setDataSharing(false);
+                },
+                'AskAI_RecommendAllowDataSharing',
+                '#/AskAI',
+            ],
             'AI Providers missing' => [
                 function (FakePluginDependencies $dependencies) {
                     $dependencies->plugins[PluginDependencies::AI_PROVIDERS] = PluginDependencies::PLUGIN_MISSING;
