@@ -125,8 +125,7 @@ final class Recommendations
                 return self::buildUrl(['module' => 'Marketplace', 'action' => 'overview'], $urlParams)
                     . '#?' . http_build_query(['showPlugin' => PluginDependencies::MCP_SERVER]);
             case self::ALLOW_DATA_SHARING:
-                return self::buildUrl(['module' => 'CoreAdminHome', 'action' => 'generalSettings'], $urlParams)
-                    . '#/AskAI';
+                return self::buildUrl(['module' => 'AskAI', 'action' => 'settings'], $urlParams);
             case self::ENABLE_MCP:
             case self::ENABLE_WRITE_MODE:
                 return self::buildUrl(['module' => 'CoreAdminHome', 'action' => 'generalSettings'], $urlParams)

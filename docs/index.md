@@ -18,11 +18,12 @@
 - Markdown answers with scrollable tables and code blocks, and buttons to copy an answer or a code block.
 - Enter sends the message, Shift+Enter adds a new line.
 
-#### Any provider, any model, no connection settings
+#### Any provider, any model, your own prompts
 
-- The plugin has no API key, no host and no model list of its own, only the privacy settings: it answers with the provider and model connected in **Administration > System > AI Providers**, whichever they are (OpenAI, Anthropic, Google, Amazon Bedrock or a custom OpenAI-compatible endpoint).
+- The plugin has no API key, no host and no model list of its own: it answers with the provider and model connected in **Administration > System > AI Providers**, whichever they are (OpenAI, Anthropic, Google, Amazon Bedrock or a custom OpenAI-compatible endpoint).
 - Change the provider or the model in AI Providers and the assistant follows, without any change in the plugin.
-- The chat and insight prompts are fixed, written for analytics and translated: the chat answers as a senior analytics consultant (direct answer, key figures, prioritised recommendations, no invented figures), and insights follow a fixed structure (summary, key figures, notable patterns, recommendations).
+- The default chat and insight prompts are written for analytics and translated: the chat answers as a senior analytics consultant (direct answer, key figures, prioritised recommendations, no invented figures), and insights follow a fixed structure (summary, key figures, notable patterns, recommendations).
+- Super users can rewrite both prompts for all websites in **Administration > System > Ask AI**, and website admins can override them for one website in **Administration > Websites > Ask AI**. An empty prompt follows the general prompt, and a prompt left to its default follows the future updates of the plugin. The context of the website and period, the Matomo tools and the confirmation rule for write actions are always added after the prompt.
 - While AI Providers cannot answer, the plugin shows what to set up instead of a form: the AI Providers plugin is missing, not activated, or no provider is connected. Super users get a direct link for each step, other users are asked to contact their Matomo administrator.
 
 #### Agent mode, with MCP Server
@@ -52,7 +53,7 @@ When the **McpServer** plugin is enabled, the chat and the insight panel work as
 ### Installation / Configuration
 
 1. Install and activate **AskAI** from **Administration > Platform > Marketplace**.
-2. As a super user, connect a provider in **Administration > System > AI Providers**, then check **Allow sending Matomo data to the AI provider** in **Administration > System > General settings > AskAI** (off by default). This privacy section, which also shows where the data goes and sets the masking, is the only setting of AskAI.
+2. As a super user, connect a provider in **Administration > System > AI Providers**, then check **Allow sending Matomo data to the AI provider** in **Administration > System > Ask AI** (off by default). This page also shows where the data goes, sets the masking and holds the chat and insight prompts.
 3. Optionally, for the agent mode, install, activate and enable **McpServer** (**Administration > System > General settings > McpServer**). The chat guides you through each missing step.
 
 Then open the **Ask AI** page in the main menu, or click the **Ask AI** button in the header of a report.
@@ -61,7 +62,7 @@ Then open the **Ask AI** page in the main menu, or click the **Ask AI** button i
 
 - Insights send the data of the report you are looking at (labels, metrics and totals), its period, segment and comparisons, and the conversation, to the provider connected in AI Providers.
 - The chat sends your messages and the prompt. In agent mode, the results of the Matomo tools the agent calls are also sent to the provider.
-- Nothing is sent to the AI provider until a super user checks **Allow sending Matomo data to the AI provider** in **Administration > System > General settings > AskAI**. It is off by default: until then, the chat and the insights tell users to ask a super user to allow it.
+- Nothing is sent to the AI provider until a super user checks **Allow sending Matomo data to the AI provider** in **Administration > System > Ask AI**. It is off by default: until then, the chat and the insights tell users to ask a super user to allow it.
 - Before sending, e-mail and IP addresses are replaced with `[email]` and `[ip]`, and URL query strings are removed, in the report data and in the results of the Matomo tools. Both are on by default and can be turned off in the same section.
 - Visitor-level data (Visits Log, visitor profiles, real-time and User ID reports) is excluded by default: the insights and the agent cannot read it until a super user unchecks **Exclude visitor-level data**.
 - Insight requests are restricted to the report and data methods of widgets declared by Matomo, never to an arbitrary API method, and run with the permissions of the current user.

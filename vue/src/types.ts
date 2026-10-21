@@ -53,3 +53,13 @@ export interface AgentEvent {
   isError?: boolean;
   message?: string;
 }
+
+// a field of the Ask AI pages of the administration
+export interface SettingField {
+  name: string;
+  uicontrol: string;
+  title: string;
+  description: string;
+  // a value set in the config file cannot be changed from the UI
+  disabled?: boolean;
+}

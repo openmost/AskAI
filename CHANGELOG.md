@@ -1,5 +1,17 @@
 ## Changelog
 
+### 6.2.0
+
+**Prompts**
+
+- New *Administration > System > Ask AI* page, for super users: the chat and insight prompts of all websites can be rewritten, with a *Reset to default* button. A prompt left to its default is not stored, so it follows the future updates of the plugin.
+- New *Administration > Websites > Ask AI* page, for website admins: the chat and insight prompts can be overridden for one website. An empty prompt follows the general prompt.
+- The context of the website and period, the Matomo tools and the confirmation rule for write actions are always added after the prompt, a custom prompt cannot remove them.
+
+**Privacy**
+
+- The privacy settings move from *Administration > System > General settings* to the new *Administration > System > Ask AI* page. Their saved values are kept.
+
 ### 6.1.2
 
 - Documentation update.

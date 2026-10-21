@@ -545,7 +545,7 @@ class McpAgentTest extends TestCase
         $recommendation = $status['recommendations'][0];
         $this->assertSame(Recommendations::ALLOW_DATA_SHARING, $recommendation['id']);
         $this->assertSame(
-            'index.php?module=CoreAdminHome&action=generalSettings&idSite=1&period=day&date=yesterday#/AskAI',
+            'index.php?module=AskAI&action=settings&idSite=1&period=day&date=yesterday',
             $recommendation['url']
         );
         $this->assertFalse($recommendation['askAdministrator']);

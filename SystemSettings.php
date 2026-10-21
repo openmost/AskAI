@@ -14,12 +14,13 @@ use Piwik\Container\StaticContainer;
 use Piwik\Piwik;
 use Piwik\Plugins\AskAI\Agent\PluginDependencies;
 use Piwik\Plugins\AskAI\Services\DataPrivacy;
+use Piwik\Plugins\AskAI\Settings\DefaultPrompts;
 use Piwik\Settings\FieldConfig;
 use Piwik\Settings\Setting;
 
 /**
- * The privacy settings, the only settings of AskAI: the provider, the model and the credentials belong to AI Providers.
- * Listed in Administration > System > General settings, editable by super users only.
+ * The privacy settings and the general prompts: the provider, the model and the credentials belong to AI Providers.
+ * Edited on the Ask AI page of the System administration (see Settings\SystemSettingsForm), by super users only.
  */
 class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
 {
@@ -35,6 +36,12 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     /** @var Setting */
     public $excludeVisitorData;
 
+    /** @var Setting */
+    public $chatBasePrompt;
+
+    /** @var Setting */
+    public $insightBasePrompt;
+
     protected function init()
     {
         // nothing is sent to the AI provider until a super user allows it
@@ -43,11 +50,50 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
                 $field->title = Piwik::translate('AskAI_PrivacySetting_' . $name);
                 $field->description = Piwik::translate('AskAI_PrivacySetting_' . $name . 'Help');
                 $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
-                if ($name === DataPrivacy::SETTING_DATA_SHARING) {
-                    $field->introduction = trim(Piwik::translate('AskAI_PrivacySettingsIntro') . ' ' . self::getDataDestination());
-                }
             });
         }
+
+        // a default prompt is not stored, so the defaults rewritten by a later version reach this install
+        $this->chatBasePrompt = $this->makePromptSetting(DefaultPrompts::CHAT, 'AskAI_ChatBasePrompt', 'AskAI_ChatBasePromptDescription');
+        $this->insightBasePrompt = $this->makePromptSetting(DefaultPrompts::INSIGHT, 'AskAI_InsightBasePrompt', 'AskAI_InsightBasePromptDescription');
+    }
+
+    /**
+     * None is listed in Administration > General settings nor accepted by CorePluginsAdmin.setSystemSettings: the
+     * Ask AI page of the System administration groups them with the website prompts.
+     *
+     * @return Setting[]
+     */
+    public function getSettingsWritableByCurrentUser()
+    {
+        return [];
+    }
+
+    /**
+     * General prompt: the default, in the language of the current user, when none is stored
+     */
+    public function getPrompt(string $name): string
+    {
+        $value = $name === DefaultPrompts::INSIGHT ? $this->insightBasePrompt->getValue() : $this->chatBasePrompt->getValue();
+
+        return DefaultPrompts::resolve($name, is_scalar($value) ? (string) $value : '');
+    }
+
+    private function makePromptSetting(string $name, string $titleKey, string $descriptionKey): Setting
+    {
+        return $this->makeSetting($name, '', FieldConfig::TYPE_STRING, function (FieldConfig $field) use ($name, $titleKey, $descriptionKey) {
+            $field->title = Piwik::translate($titleKey);
+            $field->description = Piwik::translate($descriptionKey);
+            $field->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
+            $field->validate = function ($value) {
+                if (is_string($value) && mb_strlen($value) > DefaultPrompts::MAX_LENGTH) {
+                    throw new \Exception(Piwik::translate('AskAI_PromptTooLong', [DefaultPrompts::MAX_LENGTH]));
+                }
+            };
+            $field->transform = function ($value) use ($name) {
+                return DefaultPrompts::toStoredGeneralPrompt($name, $value);
+            };
+        });
     }
 
     /**

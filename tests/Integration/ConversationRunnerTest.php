@@ -94,7 +94,7 @@ class ConversationRunnerTest extends IntegrationTestCase
         parent::tearDown();
     }
 
-    public function test_run_chat_conversesThroughTheAiProvidersService_withTheFixedChatPrompt(): void
+    public function test_run_chat_conversesThroughTheAiProvidersService_withTheDefaultChatPrompt(): void
     {
         $this->agent->responses = [$this->textResponse('You had **257** visits.')];
 
@@ -132,6 +132,25 @@ class ConversationRunnerTest extends IntegrationTestCase
             [['role' => 'user', 'content' => [['type' => 'text', 'text' => Piwik::translate('AskAI_InsightAgentPrompt')]]]],
             $request->getMessages()
         );
+    }
+
+    public function test_run_usesThePromptsOfTheWebsite_thenTheGeneralPrompts_keepingTheSafeguardsAfterThem(): void
+    {
+        Request::processRequest('AskAI.setSystemSettings', ['insightBasePrompt' => 'General insight prompt']);
+        Request::processRequest('AskAI.setSiteSettings', ['idSite' => $this->idSite, 'chatBasePrompt' => 'Website chat prompt']);
+        $this->agent->responses = [$this->textResponse('Chat answer'), $this->textResponse('Insight answer')];
+
+        $this->run_([['role' => 'user', 'content' => 'How many visits?']]);
+        $this->run_([], ['module' => 'VisitsSummary', 'action' => 'get']);
+
+        $chatPrompt = $this->agent->requests[0]->getSystemPrompt();
+        $this->assertStringStartsWith("Website chat prompt\n", $chatPrompt);
+        $this->assertStringContainsString(self::TOOLS_SENTENCE, $chatPrompt);
+        $this->assertStringContainsString('(idSite ' . $this->idSite . ')', $chatPrompt);
+
+        $insightPrompt = $this->agent->requests[1]->getSystemPrompt();
+        $this->assertStringStartsWith("General insight prompt\n", $insightPrompt);
+        $this->assertStringContainsString('"method":"VisitsSummary.get"', $insightPrompt);
     }
 
     public function test_run_fallsBackToAPlainChat_whenTheProviderHasNoToolSupport(): void
