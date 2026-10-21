@@ -12,11 +12,12 @@ namespace Piwik\Plugins\AskAI\Services;
 
 use Piwik\Piwik;
 use Piwik\Plugins\AskAI\Agent\McpAgent;
+use Piwik\Plugins\AskAI\Settings\EffectivePrompts;
 
 /**
  * Runs one turn of the chat or of a report insight: rate limit, conversation, system prompt, then the agent.
  *
- * The system prompts are fixed translations, there is no setting to change them.
+ * The base prompts come from the settings of the website, then the general settings, then the translated defaults.
  */
 class ConversationRunner
 {
@@ -35,12 +36,21 @@ class ConversationRunner
     /** @var RateLimiter */
     private $rateLimiter;
 
-    public function __construct(McpAgent $agent, ChatRequestParser $parser, InsightReport $insightReport, RateLimiter $rateLimiter)
-    {
+    /** @var EffectivePrompts */
+    private $prompts;
+
+    public function __construct(
+        McpAgent $agent,
+        ChatRequestParser $parser,
+        InsightReport $insightReport,
+        RateLimiter $rateLimiter,
+        ?EffectivePrompts $prompts = null
+    ) {
         $this->agent = $agent;
         $this->parser = $parser;
         $this->insightReport = $insightReport;
         $this->rateLimiter = $rateLimiter;
+        $this->prompts = $prompts ?? new EffectivePrompts();
     }
 
     /**
@@ -68,7 +78,7 @@ class ConversationRunner
         $withTools = $this->agent->hasTools();
 
         if ($this->insightReport->isInsightRequest($widgetParams)) {
-            $basePrompt = Piwik::translate('AskAI_InsightSystemPrompt');
+            $basePrompt = $this->prompts->getInsightPrompt($idSite);
             $reportData = $this->insightReport->fetch($widgetParams, $idSite, $date, $period);
 
             // the insights panel starts the conversation without a message: ask for the analysis
@@ -79,7 +89,7 @@ class ConversationRunner
             $messages = $this->parser->endWithQuestion($messages, Piwik::translate('AskAI_InsightAgentPrompt'));
             $featureKey = self::FEATURE_INSIGHTS;
         } else {
-            $basePrompt = Piwik::translate('AskAI_ChatSystemPrompt');
+            $basePrompt = $this->prompts->getChatPrompt($idSite);
             $reportData = null;
             $featureKey = self::FEATURE_CHAT;
         }

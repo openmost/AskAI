@@ -123,7 +123,7 @@ class ChatPageTest extends IntegrationTestCase
                     self::setDataSharing(false);
                 },
                 'AskAI_RecommendAllowDataSharing',
-                '#/AskAI',
+                'module=AskAI&action=settings',
             ],
             'AI Providers missing' => [
                 function (FakePluginDependencies $dependencies) {

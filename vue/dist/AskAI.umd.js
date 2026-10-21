@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("CoreHome"), require("vue"));
+		module.exports = factory(require("CoreHome"), require("vue"), require("CorePluginsAdmin"));
 	else if(typeof define === 'function' && define.amd)
-		define(["CoreHome", ], factory);
+		define(["CoreHome", , "CorePluginsAdmin"], factory);
 	else if(typeof exports === 'object')
-		exports["AskAI"] = factory(require("CoreHome"), require("vue"));
+		exports["AskAI"] = factory(require("CoreHome"), require("vue"), require("CorePluginsAdmin"));
 	else
-		root["AskAI"] = factory(root["CoreHome"], root["Vue"]);
-})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__19dc__, __WEBPACK_EXTERNAL_MODULE__8bbf__) {
+		root["AskAI"] = factory(root["CoreHome"], root["Vue"], root["CorePluginsAdmin"]);
+})((typeof self !== 'undefined' ? self : this), function(__WEBPACK_EXTERNAL_MODULE__19dc__, __WEBPACK_EXTERNAL_MODULE__8bbf__, __WEBPACK_EXTERNAL_MODULE_a5a2__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -107,6 +107,17 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "0864":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_ManageSystemSettings_vue_vue_type_style_index_0_id_5ea3c663_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("cc2e");
+/* harmony import */ var _node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_ManageSystemSettings_vue_vue_type_style_index_0_id_5ea3c663_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_ManageSystemSettings_vue_vue_type_style_index_0_id_5ea3c663_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
 
 /***/ }),
 
@@ -219,6 +230,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__19dc__;
 /* harmony import */ var _node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_Markdown_vue_vue_type_style_index_0_id_7f6f2b63_lang_less__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_Markdown_vue_vue_type_style_index_0_id_7f6f2b63_lang_less__WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
 
+
+/***/ }),
+
+/***/ "5d44":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -2736,6 +2754,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__19dc__;
 /***/ (function(module, exports) {
 
 module.exports = __WEBPACK_EXTERNAL_MODULE__8bbf__;
+
+/***/ }),
+
+/***/ "a5a2":
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_a5a2__;
 
 /***/ }),
 
@@ -7930,6 +7955,13 @@ if (true) {
 
 /***/ }),
 
+/***/ "cc2e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+
 /***/ "d223":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7959,6 +7991,17 @@ if (true) {
 
 /***/ }),
 
+/***/ "f223":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_ManageSiteSettings_vue_vue_type_style_index_0_id_c57df7b4_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5d44");
+/* harmony import */ var _node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_ManageSiteSettings_vue_vue_type_style_index_0_id_c57df7b4_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_cli_service_node_modules_mini_css_extract_plugin_dist_loader_js_ref_11_oneOf_1_0_node_modules_vue_cli_service_node_modules_css_loader_dist_cjs_js_ref_11_oneOf_1_1_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_11_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_11_oneOf_1_3_node_modules_vue_cli_service_node_modules_cache_loader_dist_cjs_js_ref_1_0_node_modules_vue_cli_service_node_modules_vue_loader_v16_dist_index_js_ref_1_1_ManageSiteSettings_vue_vue_type_style_index_0_id_c57df7b4_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "f9b8":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7975,6 +8018,8 @@ __webpack_require__.r(__webpack_exports__);
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "ChatIndexPage", function() { return /* reexport */ ChatIndexPage; });
+__webpack_require__.d(__webpack_exports__, "ManageSiteSettings", function() { return /* reexport */ ManageSiteSettings; });
+__webpack_require__.d(__webpack_exports__, "ManageSystemSettings", function() { return /* reexport */ ManageSystemSettings; });
 __webpack_require__.d(__webpack_exports__, "Markdown", function() { return /* reexport */ Markdown; });
 __webpack_require__.d(__webpack_exports__, "IconAi", function() { return /* reexport */ IconAi; });
 __webpack_require__.d(__webpack_exports__, "ChatIcon", function() { return /* reexport */ ChatIcon; });
@@ -9934,6 +9979,392 @@ ChatIndexPagevue_type_script_lang_ts.render = render
 ChatIndexPagevue_type_script_lang_ts.__scopeId = "data-v-9e81ba70"
 
 /* harmony default export */ var ChatIndexPage = (ChatIndexPagevue_type_script_lang_ts);
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--1-1!./plugins/AskAI/vue/src/ManageSiteSettings/ManageSiteSettings.vue?vue&type=template&id=c57df7b4&scoped=true
+
+const ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_withScopeId = n => (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["pushScopeId"])("data-v-c57df7b4"), n = n(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["popScopeId"])(), n);
+const ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_1 = /*#__PURE__*/ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_withScopeId(() => /*#__PURE__*/Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", {
+  id: "askaiSiteNotice_prompts"
+}, null, -1));
+const ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_2 = {
+  class: "askaiActions"
+};
+const ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_3 = ["title"];
+const ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_4 = {
+  key: 0,
+  class: "askaiGeneralSettingsLink"
+};
+const ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_5 = ["href"];
+function ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_Field = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("Field");
+  const _component_SaveButton = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("SaveButton");
+  const _component_ContentBlock = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("ContentBlock");
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", null, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_ContentBlock, {
+    "content-title": _ctx.translate('AskAI_SettingsPromptsTitle')
+  }, {
+    default: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withCtx"])(() => [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("p", null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_SiteSettingsPromptsIntro')), 1), (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(true), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["renderList"])(_ctx.fields, field => {
+      return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", {
+        key: field.name,
+        class: "askaiPromptField"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_Field, {
+        uicontrol: field.uicontrol,
+        name: `askai_${field.name}`,
+        title: field.title,
+        "inline-help": field.description,
+        modelValue: _ctx.values[field.name],
+        "onUpdate:modelValue": $event => _ctx.values[field.name] = $event
+      }, null, 8, ["uicontrol", "name", "title", "inline-help", "modelValue", "onUpdate:modelValue"])]);
+    }), 128)), ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_1, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_2, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_SaveButton, {
+      class: "askaiSavePrompts",
+      saving: _ctx.isSaving,
+      onConfirm: _cache[0] || (_cache[0] = $event => _ctx.save())
+    }, null, 8, ["saving"]), _ctx.hasCustomPrompt ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("button", {
+      key: 0,
+      type: "button",
+      class: "btn btn-outline askaiResetPrompts",
+      title: _ctx.translate('AskAI_UseGeneralPromptHelp'),
+      onClick: _cache[1] || (_cache[1] = $event => _ctx.resetPrompts())
+    }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_UseGeneralPrompt')), 9, ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_3)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]), _ctx.generalSettingsUrl ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_4, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_SiteSettingsGeneralSettings')) + " ", 1), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("a", {
+      href: _ctx.generalSettingsUrl
+    }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_SystemSettingsLink')), 9, ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_hoisted_5)])) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]),
+    _: 1
+  }, 8, ["content-title"])]);
+}
+// CONCATENATED MODULE: ./plugins/AskAI/vue/src/ManageSiteSettings/ManageSiteSettings.vue?vue&type=template&id=c57df7b4&scoped=true
+
+// EXTERNAL MODULE: external "CorePluginsAdmin"
+var external_CorePluginsAdmin_ = __webpack_require__("a5a2");
+
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-typescript/node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/babel-loader/lib!./node_modules/@vue/cli-plugin-typescript/node_modules/ts-loader??ref--15-2!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--1-1!./plugins/AskAI/vue/src/ManageSiteSettings/ManageSiteSettings.vue?vue&type=script&lang=ts
+
+
+
+/**
+ * Prompts of a website, rendered on the Ask AI page of the Websites administration.
+ * An empty prompt follows the general prompt, the site is chosen with the site selector.
+ */
+/* harmony default export */ var ManageSiteSettingsvue_type_script_lang_ts = (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["defineComponent"])({
+  name: 'ManageSiteSettings',
+  components: {
+    ContentBlock: external_CoreHome_["ContentBlock"],
+    Field: external_CorePluginsAdmin_["Field"],
+    SaveButton: external_CorePluginsAdmin_["SaveButton"]
+  },
+  props: {
+    idSite: {
+      type: [Number, String],
+      required: true
+    },
+    fields: {
+      type: Array,
+      required: true
+    },
+    settings: {
+      type: Object,
+      required: true
+    },
+    generalSettingsUrl: {
+      type: String,
+      default: ''
+    },
+    // prompts of the general settings, used by the website when its own prompt is empty
+    generalPrompts: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  setup(props) {
+    const values = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["reactive"])(Object.assign({}, props.settings));
+    const isSaving = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["ref"])(false);
+    const hasCustomPrompt = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["computed"])(() => props.fields.some(field => !!(values[field.name] || '').trim()));
+    // the website goes back to the general prompts, the fields are left empty rather than copied
+    const resetPrompts = () => {
+      props.fields.forEach(field => {
+        values[field.name] = '';
+      });
+    };
+    const notify = (context, message) => {
+      external_CoreHome_["NotificationsStore"].show({
+        message,
+        context,
+        type: 'transient',
+        id: 'askaiSiteSettingsNotice_prompts',
+        placeat: '#askaiSiteNotice_prompts'
+      });
+    };
+    const save = () => {
+      isSaving.value = true;
+      const postParams = {
+        idSite: props.idSite
+      };
+      props.fields.forEach(field => {
+        postParams[field.name] = values[field.name] || '';
+      });
+      external_CoreHome_["AjaxHelper"].post({
+        method: 'AskAI.setSiteSettings'
+      }, postParams, {
+        createErrorNotification: false
+      }).then(() => {
+        // a prompt equal to the general prompt is saved empty
+        props.fields.forEach(field => {
+          const general = (props.generalPrompts[field.name] || '').trim();
+          if (general && (values[field.name] || '').trim() === general) {
+            values[field.name] = '';
+          }
+        });
+        notify('success', Object(external_CoreHome_["translate"])('General_YourChangesHaveBeenSaved'));
+      }).catch(error => {
+        notify('error', error && error.message || Object(external_CoreHome_["translate"])('AskAI_AnErrorOccurred'));
+      }).finally(() => {
+        isSaving.value = false;
+      });
+    };
+    return {
+      translate: external_CoreHome_["translate"],
+      values,
+      isSaving,
+      hasCustomPrompt,
+      resetPrompts,
+      save
+    };
+  }
+}));
+// CONCATENATED MODULE: ./plugins/AskAI/vue/src/ManageSiteSettings/ManageSiteSettings.vue?vue&type=script&lang=ts
+ 
+// EXTERNAL MODULE: ./plugins/AskAI/vue/src/ManageSiteSettings/ManageSiteSettings.vue?vue&type=style&index=0&id=c57df7b4&lang=less&scoped=true
+var ManageSiteSettingsvue_type_style_index_0_id_c57df7b4_lang_less_scoped_true = __webpack_require__("f223");
+
+// CONCATENATED MODULE: ./plugins/AskAI/vue/src/ManageSiteSettings/ManageSiteSettings.vue
+
+
+
+
+
+ManageSiteSettingsvue_type_script_lang_ts.render = ManageSiteSettingsvue_type_template_id_c57df7b4_scoped_true_render
+ManageSiteSettingsvue_type_script_lang_ts.__scopeId = "data-v-c57df7b4"
+
+/* harmony default export */ var ManageSiteSettings = (ManageSiteSettingsvue_type_script_lang_ts);
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--1-1!./plugins/AskAI/vue/src/ManageSystemSettings/ManageSystemSettings.vue?vue&type=template&id=5ea3c663&scoped=true
+
+const ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_withScopeId = n => (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["pushScopeId"])("data-v-5ea3c663"), n = n(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["popScopeId"])(), n);
+const ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_1 = {
+  class: "askaiDestination"
+};
+const ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_2 = /*#__PURE__*/ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_withScopeId(() => /*#__PURE__*/Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", {
+  id: "askaiSystemNotice_privacy"
+}, null, -1));
+const ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_3 = {
+  class: "askaiActions"
+};
+const ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_4 = /*#__PURE__*/ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_withScopeId(() => /*#__PURE__*/Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", {
+  id: "askaiSystemNotice_prompts"
+}, null, -1));
+const ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_5 = {
+  class: "askaiActions"
+};
+const ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_6 = ["title"];
+function ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_Field = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("Field");
+  const _component_SaveButton = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("SaveButton");
+  const _component_ContentBlock = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("ContentBlock");
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", null, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_ContentBlock, {
+    id: "askaiPrivacy",
+    "content-title": _ctx.translate('AskAI_SettingsPrivacyTitle')
+  }, {
+    default: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withCtx"])(() => [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("p", null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_SystemSettingsIntro')), 1), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("p", null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_PrivacySettingsIntro')), 1), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("ul", ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_1, [(Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(true), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["renderList"])(_ctx.destination, line => {
+      return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("li", {
+        key: line
+      }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(line), 1);
+    }), 128))]), (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(true), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["renderList"])(_ctx.privacyFields, field => {
+      return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", {
+        key: field.name
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_Field, {
+        uicontrol: field.uicontrol,
+        name: `askaiSystem_${field.name}`,
+        title: field.title,
+        description: field.description,
+        disabled: field.disabled,
+        modelValue: _ctx.privacy[field.name],
+        "onUpdate:modelValue": $event => _ctx.privacy[field.name] = $event
+      }, null, 8, ["uicontrol", "name", "title", "description", "disabled", "modelValue", "onUpdate:modelValue"])]);
+    }), 128)), ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_2, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_3, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_SaveButton, {
+      class: "askaiSavePrivacy",
+      saving: _ctx.isSaving.privacy,
+      onConfirm: _cache[0] || (_cache[0] = $event => _ctx.save('privacy'))
+    }, null, 8, ["saving"])])]),
+    _: 1
+  }, 8, ["content-title"]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_ContentBlock, {
+    id: "askaiPrompts",
+    "content-title": _ctx.translate('AskAI_SettingsPromptsTitle')
+  }, {
+    default: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withCtx"])(() => [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("p", null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_SystemSettingsPromptsIntro')), 1), (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(true), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], null, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["renderList"])(_ctx.promptFields, field => {
+      return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", {
+        key: field.name,
+        class: "askaiPromptField"
+      }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_Field, {
+        uicontrol: field.uicontrol,
+        name: `askaiSystem_${field.name}`,
+        title: field.title,
+        description: field.description,
+        disabled: field.disabled,
+        modelValue: _ctx.values[field.name],
+        "onUpdate:modelValue": $event => _ctx.values[field.name] = $event
+      }, null, 8, ["uicontrol", "name", "title", "description", "disabled", "modelValue", "onUpdate:modelValue"])]);
+    }), 128)), ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_4, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_5, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_SaveButton, {
+      class: "askaiSavePrompts",
+      saving: _ctx.isSaving.prompts,
+      onConfirm: _cache[1] || (_cache[1] = $event => _ctx.save('prompts'))
+    }, null, 8, ["saving"]), _ctx.hasCustomPrompt ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("button", {
+      key: 0,
+      type: "button",
+      class: "btn btn-outline askaiResetPrompts",
+      title: _ctx.translate('AskAI_ResetPromptToDefaultHelp'),
+      onClick: _cache[2] || (_cache[2] = $event => _ctx.resetPrompts())
+    }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('AskAI_ResetPromptToDefault')), 9, ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_hoisted_6)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)])]),
+    _: 1
+  }, 8, ["content-title"])]);
+}
+// CONCATENATED MODULE: ./plugins/AskAI/vue/src/ManageSystemSettings/ManageSystemSettings.vue?vue&type=template&id=5ea3c663&scoped=true
+
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-typescript/node_modules/cache-loader/dist/cjs.js??ref--15-0!./node_modules/babel-loader/lib!./node_modules/@vue/cli-plugin-typescript/node_modules/ts-loader??ref--15-2!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--1-1!./plugins/AskAI/vue/src/ManageSystemSettings/ManageSystemSettings.vue?vue&type=script&lang=ts
+
+
+
+const PROMPT_FIELDS = ['chatBasePrompt', 'insightBasePrompt'];
+const PRIVACY_FIELDS = ['dataSharingAllowed', 'maskPersonalData', 'stripUrlQueryStrings', 'excludeVisitorData'];
+/**
+ * Privacy settings and general prompts, rendered on the Ask AI page of the System administration.
+ * Each card saves only its own fields, the unsaved edits of the other card are kept.
+ */
+/* harmony default export */ var ManageSystemSettingsvue_type_script_lang_ts = (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["defineComponent"])({
+  name: 'ManageSystemSettings',
+  components: {
+    ContentBlock: external_CoreHome_["ContentBlock"],
+    Field: external_CorePluginsAdmin_["Field"],
+    SaveButton: external_CorePluginsAdmin_["SaveButton"]
+  },
+  props: {
+    fields: {
+      type: Array,
+      required: true
+    },
+    settings: {
+      type: Object,
+      required: true
+    },
+    // default prompts in the language of the user, a prompt equal to its default is not stored
+    defaultPrompts: {
+      type: Object,
+      default: () => ({})
+    },
+    // where the data goes, so the super user knows what the consent covers
+    destination: {
+      type: Array,
+      default: () => []
+    }
+  },
+  setup(props) {
+    const values = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["reactive"])(Object.assign({}, props.settings));
+    const isSaving = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["reactive"])({
+      privacy: false,
+      prompts: false
+    });
+    const privacy = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["reactive"])({});
+    PRIVACY_FIELDS.forEach(name => {
+      privacy[name] = props.settings[name] === '1';
+    });
+    const privacyFields = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["computed"])(() => props.fields.filter(field => PRIVACY_FIELDS.includes(field.name)));
+    const promptFields = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["computed"])(() => props.fields.filter(field => PROMPT_FIELDS.includes(field.name)));
+    const isDefaultPrompt = name => (values[name] || '').trim() === (props.defaultPrompts[name] || '').trim();
+    // a prompt set in the config file cannot be edited, it is left as is
+    const hasCustomPrompt = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["computed"])(() => promptFields.value.some(field => !field.disabled && !isDefaultPrompt(field.name)));
+    const resetPrompts = () => {
+      promptFields.value.forEach(field => {
+        if (!field.disabled) {
+          values[field.name] = props.defaultPrompts[field.name] || '';
+        }
+      });
+    };
+    const notify = (card, context, message) => {
+      external_CoreHome_["NotificationsStore"].show({
+        message,
+        context,
+        type: 'transient',
+        id: `askaiSystemSettingsNotice_${card}`,
+        placeat: `#askaiSystemNotice_${card}`
+      });
+    };
+    const save = card => {
+      isSaving[card] = true;
+      // the fields that cannot be edited and the fields of the other card are left out, they keep
+      // their saved values
+      const cardFields = card === 'privacy' ? privacyFields.value : promptFields.value;
+      const postParams = {};
+      cardFields.forEach(field => {
+        if (field.disabled) {
+          return;
+        }
+        if (card === 'privacy') {
+          postParams[field.name] = privacy[field.name] ? '1' : '0';
+        } else {
+          postParams[field.name] = values[field.name] || '';
+        }
+      });
+      external_CoreHome_["AjaxHelper"].post({
+        method: 'AskAI.setSystemSettings'
+      }, postParams, {
+        createErrorNotification: false
+      }).then(() => {
+        if (card === 'prompts') {
+          // an empty prompt is saved as the default
+          PROMPT_FIELDS.forEach(name => {
+            if (name in postParams && !(values[name] || '').trim()) {
+              values[name] = props.defaultPrompts[name] || '';
+            }
+          });
+        }
+        notify(card, 'success', Object(external_CoreHome_["translate"])('General_YourChangesHaveBeenSaved'));
+      }).catch(error => {
+        notify(card, 'error', error && error.message || Object(external_CoreHome_["translate"])('AskAI_AnErrorOccurred'));
+      }).finally(() => {
+        isSaving[card] = false;
+      });
+    };
+    Object(external_commonjs_vue_commonjs2_vue_root_Vue_["onMounted"])(() => {
+      if (window.location.hash === '#askaiPrompts') {
+        const promptsCard = document.getElementById('askaiPrompts');
+        if (promptsCard) {
+          promptsCard.scrollIntoView();
+        }
+      }
+    });
+    return {
+      translate: external_CoreHome_["translate"],
+      values,
+      isSaving,
+      privacy,
+      privacyFields,
+      promptFields,
+      hasCustomPrompt,
+      resetPrompts,
+      save
+    };
+  }
+}));
+// CONCATENATED MODULE: ./plugins/AskAI/vue/src/ManageSystemSettings/ManageSystemSettings.vue?vue&type=script&lang=ts
+ 
+// EXTERNAL MODULE: ./plugins/AskAI/vue/src/ManageSystemSettings/ManageSystemSettings.vue?vue&type=style&index=0&id=5ea3c663&lang=less&scoped=true
+var ManageSystemSettingsvue_type_style_index_0_id_5ea3c663_lang_less_scoped_true = __webpack_require__("0864");
+
+// CONCATENATED MODULE: ./plugins/AskAI/vue/src/ManageSystemSettings/ManageSystemSettings.vue
+
+
+
+
+
+ManageSystemSettingsvue_type_script_lang_ts.render = ManageSystemSettingsvue_type_template_id_5ea3c663_scoped_true_render
+ManageSystemSettingsvue_type_script_lang_ts.__scopeId = "data-v-5ea3c663"
+
+/* harmony default export */ var ManageSystemSettings = (ManageSystemSettingsvue_type_script_lang_ts);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--1-1!./plugins/AskAI/vue/src/Components/Insight/InsightTrigger.vue?vue&type=template&id=1aa4f50c&scoped=true
 
 const InsightTriggervue_type_template_id_1aa4f50c_scoped_true_withScopeId = n => (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["pushScopeId"])("data-v-1aa4f50c"), n = n(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["popScopeId"])(), n);
@@ -10336,6 +10767,8 @@ InsightOverlayvue_type_script_lang_ts.__scopeId = "data-v-3a90bff1"
 /* harmony default export */ var InsightOverlay = (InsightOverlayvue_type_script_lang_ts);
 // CONCATENATED MODULE: ./plugins/AskAI/vue/src/index.ts
 // Pages
+
+
 
 // Components
 

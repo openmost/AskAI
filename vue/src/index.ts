@@ -1,5 +1,7 @@
 // Pages
 export { default as ChatIndexPage } from './Pages/ChatIndexPage.vue';
+export { default as ManageSiteSettings } from './ManageSiteSettings/ManageSiteSettings.vue';
+export { default as ManageSystemSettings } from './ManageSystemSettings/ManageSystemSettings.vue';
 
 // Components
 export { default as Markdown } from './Components/Markdown.vue';

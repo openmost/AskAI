@@ -1,0 +1,12 @@
+{% extends 'admin.twig' %}
+
+{% set title %}{{ 'AskAI_SystemSettingsMenu'|translate }}{% endset %}
+
+{% block content %}
+    <div vue-entry="AskAI.ManageSystemSettings"
+         fields="{{ fields|json_encode|e('html_attr') }}"
+         settings="{{ values|json_encode|e('html_attr') }}"
+         default-prompts="{{ defaultPrompts|json_encode|e('html_attr') }}"
+         destination="{{ destination|json_encode|e('html_attr') }}"
+    ></div>
+{% endblock %}

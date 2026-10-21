@@ -4,13 +4,13 @@ __How do I install and configure this plugin?__
 
 1. Install and activate **AskAI** from **Administration > Platform > Marketplace**.
 2. As a super user, connect a provider in **Administration > System > AI Providers**.
-3. Check **Allow sending Matomo data to the AI provider** in **Administration > System > General settings > AskAI**: it is off by default.
+3. Check **Allow sending Matomo data to the AI provider** in **Administration > System > Ask AI**: it is off by default.
 
-Apart from this consent and the other privacy settings, there is nothing to configure in AskAI itself. You can also download the plugin from [GitHub](https://github.com/openmost/AskAI), extract it to your `plugins/` folder and activate it.
+The same page holds the other privacy settings and the chat and insight prompts. You can also download the plugin from [GitHub](https://github.com/openmost/AskAI), extract it to your `plugins/` folder and activate it.
 
 __The chat says that data sharing is not allowed__
 
-No Matomo data leaves your instance without an explicit decision: a super user must check **Allow sending Matomo data to the AI provider** in **Administration > System > General settings > AskAI**. Other users are asked to contact a super user.
+No Matomo data leaves your instance without an explicit decision: a super user must check **Allow sending Matomo data to the AI provider** in **Administration > System > Ask AI**. Other users are asked to contact a super user.
 
 __What do I need to make it work?__
 
@@ -22,7 +22,12 @@ Every provider and model AI Providers supports: OpenAI, Anthropic, Google, Amazo
 
 __Where are the settings?__
 
-There are none. The provider, the model and the credentials are managed in AI Providers, and the chat and insight prompts are fixed, written for analytics and translated into 13 languages.
+The provider, the model and the credentials are managed in AI Providers. AskAI only has two pages:
+
+- **Administration > System > Ask AI**, for super users: the privacy settings and the chat and insight prompts of all websites.
+- **Administration > Websites > Ask AI**, for website admins: the chat and insight prompts of one website. An empty prompt follows the general prompt.
+
+The default prompts are written for analytics and translated into 13 languages. **Reset to default** brings them back.
 
 __The Ask AI page shows steps instead of the chat__
 

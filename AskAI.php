@@ -64,6 +64,19 @@ class AskAI extends \Piwik\Plugin
         $translationKeys[] = 'AskAI_CodeCopied';
         $translationKeys[] = 'AskAI_NotAvailableTitle';
         $translationKeys[] = 'AskAI_NotAvailableText';
+        $translationKeys[] = 'AskAI_SystemSettingsIntro';
+        $translationKeys[] = 'AskAI_SystemSettingsPromptsIntro';
+        $translationKeys[] = 'AskAI_SystemSettingsLink';
+        $translationKeys[] = 'AskAI_SettingsPrivacyTitle';
+        $translationKeys[] = 'AskAI_PrivacySettingsIntro';
+        $translationKeys[] = 'AskAI_SettingsPromptsTitle';
+        $translationKeys[] = 'AskAI_ResetPromptToDefault';
+        $translationKeys[] = 'AskAI_ResetPromptToDefaultHelp';
+        $translationKeys[] = 'AskAI_UseGeneralPrompt';
+        $translationKeys[] = 'AskAI_UseGeneralPromptHelp';
+        $translationKeys[] = 'AskAI_SiteSettingsPromptsIntro';
+        $translationKeys[] = 'AskAI_SiteSettingsGeneralSettings';
+        $translationKeys[] = 'General_YourChangesHaveBeenSaved';
         foreach (['AllowDataSharing', 'InstallAiProviders', 'ActivateAiProviders', 'ConnectProvider', 'InstallMcpServer', 'ActivateMcpServer', 'EnableMcp', 'EnableWriteMode'] as $step) {
             $translationKeys[] = 'AskAI_Recommend' . $step;
             $translationKeys[] = 'AskAI_Recommend' . $step . 'Action';

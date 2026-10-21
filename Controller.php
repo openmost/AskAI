@@ -12,14 +12,20 @@ use Piwik\Common;
 use Piwik\Container\StaticContainer;
 use Piwik\Log\LoggerInterface;
 use Piwik\Piwik;
+use Piwik\Plugin\ControllerAdmin;
 use Piwik\Plugins\AIProviders\Exception\AIProviderException;
 use Piwik\Plugins\AskAI\Agent\McpAgent;
 use Piwik\Plugins\AskAI\Services\ConversationRunner;
 use Piwik\Plugins\AskAI\Services\InsightNotAvailableException;
 use Piwik\Plugins\AskAI\Services\RateLimitExceededException;
 use Piwik\Plugins\AskAI\Services\SafeErrorMessage;
+use Piwik\Plugins\AskAI\Settings\DefaultPrompts;
+use Piwik\Plugins\AskAI\Settings\SiteSettingsStorage;
+use Piwik\Plugins\AskAI\Settings\SystemSettingsForm;
 use Piwik\Request;
 use Piwik\Session;
+use Piwik\Url;
+use Piwik\View;
 
 class Controller extends \Piwik\Plugin\Controller
 {
@@ -42,6 +48,60 @@ class Controller extends \Piwik\Plugin\Controller
             'is_available' => $status['available'],
             'recommendations' => $status['recommendations'],
         ]);
+    }
+
+    /**
+     * Prompts of a website, in Administration > Websites > Ask AI
+     */
+    public function manage(): string
+    {
+        $idSite = Request::fromRequest()->getIntegerParameter('idSite', 0);
+        Piwik::checkUserHasAdminAccess($idSite);
+
+        $generalSettingsUrl = '';
+        if (Piwik::hasUserSuperUserAccess()) {
+            $generalSettingsUrl = 'index.php' . Url::getCurrentQueryStringWithParametersModified([
+                'module' => SiteSettingsStorage::PLUGIN_NAME,
+                'action' => SystemSettingsForm::ACTION,
+            ]);
+        }
+
+        $systemSettings = new SystemSettings();
+        $generalPrompts = [];
+        foreach (array_keys(DefaultPrompts::SETTING_NAMES) as $name) {
+            $generalPrompts[$name] = $systemSettings->getPrompt($name);
+        }
+
+        return $this->renderTemplate('manage', [
+            'idSite' => $idSite,
+            'fields' => $this->getSitePromptFields(),
+            'values' => SiteSettingsStorage::read($idSite),
+            'generalSettingsUrl' => $generalSettingsUrl,
+            // an empty website prompt follows the general prompt
+            'generalPrompts' => $generalPrompts,
+        ]);
+    }
+
+    /**
+     * Privacy settings and general prompts, in Administration > System > Ask AI
+     */
+    public function settings(): string
+    {
+        Piwik::checkUserHasSuperUserAccess();
+
+        $form = new SystemSettingsForm();
+        $destination = SystemSettings::getDataDestination();
+
+        // this controller is not a ControllerAdmin, the admin layout needs its variables even without idSite
+        $view = new View('@AskAI/settings');
+        $this->setBasicVariablesView($view);
+        ControllerAdmin::setBasicVariablesAdminView($view);
+        $view->fields = $form->getFields();
+        $view->values = $form->getValues();
+        $view->defaultPrompts = DefaultPrompts::getDefaults();
+        $view->destination = $destination !== '' ? [$destination] : [];
+
+        return $view->render();
     }
 
     /**
@@ -93,6 +153,27 @@ class Controller extends \Piwik\Plugin\Controller
         $this->streamEvents(function (callable $emit) use ($idSite, $period, $date, $sessionKey) {
             StaticContainer::get(ConversationRunner::class)->run($idSite, $period, $date, $sessionKey, $emit);
         });
+    }
+
+    /**
+     * @return list<array{name: string, uicontrol: string, title: string, description: string}>
+     */
+    private function getSitePromptFields(): array
+    {
+        return [
+            [
+                'name' => DefaultPrompts::CHAT,
+                'uicontrol' => 'textarea',
+                'title' => Piwik::translate('AskAI_ChatBasePrompt'),
+                'description' => Piwik::translate('AskAI_ChatBasePromptDescription'),
+            ],
+            [
+                'name' => DefaultPrompts::INSIGHT,
+                'uicontrol' => 'textarea',
+                'title' => Piwik::translate('AskAI_InsightBasePrompt'),
+                'description' => Piwik::translate('AskAI_InsightBasePromptDescription'),
+            ],
+        ];
     }
 
     private function getAgent(): McpAgent

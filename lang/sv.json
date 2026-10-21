@@ -71,8 +71,26 @@
         "PrivacySetting_excludeVisitorData": "Uteslut data på besökarnivå",
         "PrivacySetting_excludeVisitorDataHelp": "Insikterna och agenten kan inte läsa besöksloggen, besökarprofilerna, realtidsrapporterna eller User ID:n.",
         "VisitorDataExcluded": "Integritetsinställningarna utesluter data på besökarnivå: insikter är inte tillgängliga för den här rapporten.",
-        "DataSharingNotAllowed": "Inget skickas till AI-leverantören förrän en superanvändare tillåter det i Administration > System > Allmänna inställningar, avsnittet AskAI.",
+        "DataSharingNotAllowed": "Inget skickas till AI-leverantören förrän en superanvändare tillåter det i Administration > System > Ask AI.",
         "RecommendAllowDataSharing": "Tillåt att Matomo-data skickas till AI-leverantören.",
-        "RecommendAllowDataSharingAction": "Öppna integritetsinställningarna"
+        "RecommendAllowDataSharingAction": "Öppna integritetsinställningarna",
+        "SystemSettingsMenu": "Ask AI",
+        "SiteSettingsMenu": "Ask AI",
+        "SystemSettingsIntro": "Inställningar för chatten och insikterna i Ask AI för alla webbplatser. Leverantören, modellen och inloggningsuppgifterna anges i AI Providers.",
+        "SystemSettingsPromptsIntro": "Standardpromptar för chatten och insikterna för alla webbplatser. En webbplats kan ersätta dem på sin Ask AI-sida, i webbplatsadministrationen.",
+        "SettingsPrivacyTitle": "Integritet",
+        "SettingsPromptsTitle": "Promptar",
+        "ChatBasePrompt": "Chattens basprompt",
+        "ChatBasePromptDescription": "Anpassa prompten för att få mer precisa svar i chattfunktionen",
+        "InsightBasePrompt": "Insikternas basprompt",
+        "InsightBasePromptDescription": "Anpassa prompten för att få mer precisa insikter för dina rapporter",
+        "ResetPromptToDefault": "Återställ standard",
+        "ResetPromptToDefaultHelp": "Fyller i standardpromptarna för chatt och insikter på ditt språk. Spara för att tillämpa dem: en standardprompt lagras inte och följer därför framtida uppdateringar av pluginet.",
+        "UseGeneralPrompt": "Använd de allmänna promptarna",
+        "UseGeneralPromptHelp": "Tömmer chatt- och insiktspromptarna för den här webbplatsen så att den använder promptarna från de allmänna inställningarna. Spara för att tillämpa ändringen.",
+        "SiteSettingsPromptsIntro": "Lämna en prompt tom för att använda prompten från de allmänna inställningarna.",
+        "SiteSettingsGeneralSettings": "Standardvärdena för alla webbplatser anges i de allmänna inställningarna:",
+        "SystemSettingsLink": "Allmänna Ask AI-inställningar",
+        "PromptTooLong": "En prompt får inte vara längre än %s tecken."
     }
 }
