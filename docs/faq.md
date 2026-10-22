@@ -8,6 +8,10 @@ __How do I install and configure this plugin?__
 
 The same page holds the other privacy settings and the chat and insight prompts. You can also download the plugin from [GitHub](https://github.com/openmost/AskAI), extract it to your `plugins/` folder and activate it.
 
+__Can I change the rate limit?__
+
+Yes, in a `[AskAI]` section of `config/config.ini.php`: `rate_limit_requests` sets the AI requests per user and per website (30 by default, 0 disables the limit) and `rate_limit_window` the length of the window in seconds (3600 by default). These values are kept when the plugin is updated.
+
 __The chat says that data sharing is not allowed__
 
 No Matomo data leaves your instance without an explicit decision: a super user must check **Allow sending Matomo data to the AI provider** in **Administration > System > Ask AI**. Other users are asked to contact a super user.
