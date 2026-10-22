@@ -37,7 +37,7 @@ class NoProviderSettingsTest extends TestCase
 
         $settings = array_map('basename', glob(self::PLUGIN_DIR . '/Settings/*') ?: []);
         sort($settings);
-        $this->assertSame(['DefaultPrompts.php', 'EffectivePrompts.php', 'SiteSettingsStorage.php', 'SystemSettingsForm.php'], $settings);
+        $this->assertSame(['DefaultPrompts.php', 'EffectivePrompts.php', 'IniConfig.php', 'SiteSettingsStorage.php', 'SystemSettingsForm.php'], $settings);
 
         $templates = array_map('basename', glob(self::PLUGIN_DIR . '/templates/*') ?: []);
         sort($templates);

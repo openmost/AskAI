@@ -38,6 +38,9 @@
 
     mountInsightOverlay();
 
+    // the insight trigger reads the search, sort and expanded rows of the report within this element
+    element.setAttribute('data-ai-insight-widget', '');
+
     var insightTrigger = document.createElement('div');
     insightTrigger.classList.add('ai-chat-insight-trigger-vue-wrapper');
     insightTrigger.setAttribute('vue-entry', 'AskAI.InsightTrigger');
