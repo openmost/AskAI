@@ -1,5 +1,10 @@
 ## Changelog
 
+### 6.3.0
+
+- Insights follow the table as you left it: the search, the sort, the flattening and up to 5 expanded rows, whose subtables are added to the analysis.
+- The rate limit is configurable in a `[AskAI]` section of `config/config.ini.php`: `rate_limit_requests` (30 by default, 0 disables it) and `rate_limit_window` in seconds (3600 by default).
+
 ### 6.2.0
 
 **Prompts**
